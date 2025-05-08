@@ -1,0 +1,6 @@
+Youssef El-Harati
+ID = {1, 2, 3}, fName = {Jane, Don, Ted}
+a) ID×fName = {(1, Jane), (1, Don), (1, Ted), (2, Jane), (2, Don), (2, Ted), (3, Jane), (3, Don), (3, Ted)}.
+b) Yes
+c) {(2, Jane), (2, Don), (2, Ted)}
+d) 3
