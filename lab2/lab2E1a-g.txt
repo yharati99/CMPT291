@@ -1,0 +1,15 @@
+Youssef El-Harati
+
+a) Attr(Enrollment) = {sID, cID}
+
+b) Cardinality is 2.
+
+c) Cardinality is 8.
+
+d) (sID, cID)
+
+e) Student sIDid enrolled in cID
+
+f)(01028190, MATH307)
+
+g) (01028190, PHIL101)
