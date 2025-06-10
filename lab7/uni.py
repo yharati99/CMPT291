@@ -117,7 +117,7 @@ def insert_student():
     fName = input("Enter student's first name: ")
     lName = input("Enter student's last name: ")
     major = input("Enter student's major: ")
-    cursor.execute("INSERT INTO Student VALUES (?, ?, ?, ?)", (sID, fName, lName, major))
+    cursor.execute("INSERT INTO Student VALUES (?, ?, ?, ?);", (sID, fName, lName, major))
     conn.commit()
     print(f"Student {fName} {lName} added successfully.")
     print("\nPress 1 to return to the main menu")
@@ -132,7 +132,7 @@ def enroll_student():
     sID = input("Please enter the student's ID: ")
     cID = input("Please enter the course ID: ")
     
-    cursor.execute("SELECT * FROM Student WHERE sID = ?", (sID,))
+    cursor.execute("SELECT * FROM Student WHERE sID = ?;", (sID,))
     if not cursor.fetchone():
         print(f"ERROR Student with ID {sID} does not exist.")
         print("\nPress 1 to return to the main menu")
@@ -144,7 +144,7 @@ def enroll_student():
             exit_program()
         return
     
-    cursor.execute("SELECT * FROM Course WHERE cID = ?", (cID,))
+    cursor.execute("SELECT * FROM Course WHERE cID = ?;", (cID,))
     if not cursor.fetchone():
         print(f"ERROR Course with ID {cID} does not exist.")
         print("\nPress 1 to return to the main menu")
@@ -156,7 +156,7 @@ def enroll_student():
             exit_program()
         return
     
-    cursor.execute("INSERT INTO Enrollment VALUES (?, ?, ?)", (sID, cID, None))
+    cursor.execute("INSERT INTO Enrollment VALUES (?, ?, ?);", (sID, cID, None))
     conn.commit()
     print(f"Student with ID {sID} enrolled in course {cID}.")
     print("\nPress 1 to return to the main menu")
@@ -171,7 +171,7 @@ def unenroll_student():
     sID = input("Please enter the student's ID: ")
     cID = input("Please enter the course ID: ")
     
-    cursor.execute("SELECT * FROM Enrollment WHERE sID = ? AND cID = ?", (sID, cID))
+    cursor.execute("SELECT * FROM Enrollment WHERE sID = ? AND cID = ?;", (sID, cID))
     if not cursor.fetchone():
         print(f"ERROR Student with ID {sID} is not enrolled in course {cID}.")
         print("\nPress 1 to return to the main menu")
@@ -183,7 +183,7 @@ def unenroll_student():
             exit_program()
         return
     
-    cursor.execute("DELETE FROM Enrollment WHERE sID = ? AND cID = ?", (sID, cID))
+    cursor.execute("DELETE FROM Enrollment WHERE sID = ? AND cID = ?;", (sID, cID))
     conn.commit()
     print(f"Student with ID {sID} unenrolled from course {cID}.")
     print("\nPress 1 to return to the main menu")
@@ -196,7 +196,7 @@ def unenroll_student():
 
 def update_student_record():
     sID = input("Enter the student's ID whose record you want to update: ")
-    cursor.execute("SELECT * FROM Student WHERE sID = ?", (sID,))
+    cursor.execute("SELECT * FROM Student WHERE sID = ?;", (sID,))
     
     if not cursor.fetchone():
         print(f"ERROR Student with ID {sID} does not exist.")
@@ -218,19 +218,19 @@ def update_student_record():
     choice = input("Enter your choice (1-4): ")
     if choice == '1':
         new_sID = input("Enter the new student ID: ")
-        cursor.execute("UPDATE Student SET sID = ? WHERE sID = ?", (new_sID, sID))
+        cursor.execute("UPDATE Student SET sID = ? WHERE sID = ?;", (new_sID, sID))
         conn.commit()
     elif choice == '2':
         new_fName = input("Enter the new first name: ")
-        cursor.execute("UPDATE Student SET fName = ? WHERE sID = ?", (new_fName, sID))
+        cursor.execute("UPDATE Student SET fName = ? WHERE sID = ?;", (new_fName, sID))
         conn.commit()
     elif choice == '3':
         new_lName = input("Enter the new last name: ")
-        cursor.execute("UPDATE Student SET lName = ? WHERE sID = ?", (new_lName, sID))
+        cursor.execute("UPDATE Student SET lName = ? WHERE sID = ?;", (new_lName, sID))
         conn.commit()
     elif choice == '4':
         new_major = input("Enter the new major: ")
-        cursor.execute("UPDATE Student SET major = ? WHERE sID = ?", (new_major, sID))
+        cursor.execute("UPDATE Student SET major = ? WHERE sID = ?;", (new_major, sID))
         conn.commit()
     else:
         print("Invalid choice.")
@@ -253,7 +253,7 @@ def update_student_record():
         exit_program()
 
 def see_courses():
-    cursor.execute("SELECT * FROM Course")
+    cursor.execute("SELECT * FROM Course;")
     courses = cursor.fetchall()
     
     print("\nAvailable Courses:")
@@ -270,7 +270,7 @@ def see_courses():
 
 def see_student_enrollments():
     sID = input("Please enter the student's ID: ")
-    cursor.execute("SELECT * FROM Enrollment WHERE sID = ?", (sID,))
+    cursor.execute("SELECT * FROM Enrollment WHERE sID = ?;", (sID,))
     enrollments = cursor.fetchall()
     
     if not enrollments:
@@ -298,7 +298,7 @@ def see_student_enrollments():
 
 def see_course_enrollment_count():
     cID = input("Please enter the course ID: ")
-    cursor.execute("SELECT COUNT(*) FROM Enrollment WHERE cID = ?", (cID,))
+    cursor.execute("SELECT COUNT(*) FROM Enrollment WHERE cID = ?;", (cID,))
     count = cursor.fetchone()[0]
     
     if count == 0:
